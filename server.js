@@ -3,10 +3,16 @@ import pagesRouter from "./routes/pages.js";
 import apiRouter from "./routes/api.js";
 
 const app = express();
+app.set("view engine", "ejs");
+
 const PORT = process.env.PORT || 3000;
 
 app.use("/", pagesRouter);
 app.use("/api", apiRouter);
+
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About" });
+});
 
 app.use((req, res) => {
   res.status(404).send("Page not found.");
